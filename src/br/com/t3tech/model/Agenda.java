@@ -21,9 +21,9 @@ public class Agenda {
         agendamentos.add(agendamento);
     }
 
-    public void removeAgendamento(Agendamento agendamento) {
-        agendamentos.remove(agendamento);
-    }
+//    public void removeAgendamento(Agendamento agendamento) {
+//        agendamentos.remove(agendamento);
+//    }
 
     public void listarAgendamentos() {
         for (Agendamento agendamento : agendamentos) {
@@ -49,16 +49,16 @@ public class Agenda {
         }
     }
 
-    public void ApagaAgendamentosPorData(String data) {
-
-        for (Agendamento agendamento : agendamentos) {
-            if (agendamento.getData().equals(data)) {
-                agendamentos.remove(agendamento);
-                System.out.println("Agendamento removido com sucesso!");
-                break;
-            }
-        }
-    }
+//    public void ApagaAgendamentosPorData(String data) {
+//
+//        for (Agendamento agendamento : agendamentos) {
+//            if (agendamento.getData().equals(data)) {
+//                agendamentos.remove(agendamento);
+//                System.out.println("Agendamento removido com sucesso!");
+//                break;
+//            }
+//        }
+//    }
 
 
     public void deletarAgendamento() {
