@@ -55,11 +55,11 @@ public class Agendamento {
 
     @Override
     public String toString() {
-        return "Agendamento{" +
-                "data='" + data + '\'' +
-                ", nomeCliente ='" + nomeCliente + '\'' +
-                ", servicoDeBeleza=" + servicoDeBeleza +
-                ", valor=" + valor +
-                '}';
+        return "Agendamento: " + "\n" +
+                " data: " + data + '\n' +
+                " nome do cliente: " + nomeCliente + '\n' +
+                " valor: " + valor + '\n' +
+                " Profissional: " + servicoDeBeleza
+                ;
     }
 }

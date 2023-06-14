@@ -11,7 +11,13 @@ public class Agenda {
 
     ArrayList<Agendamento> agendamentos = new ArrayList<Agendamento>();
 
-    public void addAgendamento(Agendamento agendamento) {
+    public void addAgendamento(Agendamento agendamento)  {
+        for (Agendamento agendamentoProcura : agendamentos) {
+            if (agendamentoProcura.getData().equals(agendamento.getData()) && agendamentoProcura.getServicoDeBeleza().equals(agendamento.getServicoDeBeleza())) {
+                throw new IllegalArgumentException("Já existe um agendamento para esta data com este serviço!");
+            }
+        }
+
         agendamentos.add(agendamento);
     }
 
@@ -37,9 +43,20 @@ public class Agenda {
     public void comissaoPorServico(ServicoDeBeleza funcionario) {
         for (Agendamento agendamento : agendamentos) {
             if (agendamento.getServicoDeBeleza().equals(funcionario)) {
-                System.out.println("Serviço:" + agendamento + "Valor a ser pago: " + funcionario.getComissao(agendamento.getValor()));
+                System.out.println(agendamento + "\nValor a ser pago: " + funcionario.getComissao(agendamento.getValor()));
             }
 
+        }
+    }
+
+    public void ApagaAgendamentosPorData(String data) {
+
+        for (Agendamento agendamento : agendamentos) {
+            if (agendamento.getData().equals(data)) {
+                agendamentos.remove(agendamento);
+                System.out.println("Agendamento removido com sucesso!");
+                break;
+            }
         }
     }
 

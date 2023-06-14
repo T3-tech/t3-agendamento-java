@@ -13,6 +13,7 @@ public class Main {
         ArrayList<Funcionario> funcionarios = new ArrayList<Funcionario>();
         Agenda agenda = new Agenda();
 
+
         int opcao;
         do {
             Scanner scanner = new Scanner(System.in);
@@ -29,8 +30,10 @@ public class Main {
             System.out.println("6 - Listar Agendamentos");
             System.out.println("7 - Listar Agendamentos por Data");
             System.out.println("8 - Comissão do funcionario pelo serviço: ");
+            System.out.println("9 - Deletar Agendamento por Data");
+            System.out.println("10 - Deletar funcionario por CPF");
 
-            System.out.println("9 - Sair");
+            System.out.println("11 - Sair");
             opcao = scanner.nextInt();
 
 
@@ -48,7 +51,19 @@ public class Main {
                     System.out.println("Digite o salario da Manicure");
                     double salarioManicure = scanner1.nextDouble();
                     Manicure manicure = new Manicure(nomeManicure, cpfManicure, telefoneManicure, cargoManicure, salarioManicure);
-                    funcionarios.add(manicure);
+
+                    try {
+                        for (Funcionario funcionario : funcionarios) {
+                            if (funcionario.getCpf().equals(manicure.getCpf())) {
+                                throw new IllegalArgumentException("Já existe um funcionario com este CPF!");
+                            }
+                        }
+                        funcionarios.add(manicure);
+
+                    } catch (IllegalArgumentException e) {
+                        System.out.println(e.getMessage());
+                        break;
+                    }
 
                     break;
                 case 2:
@@ -64,7 +79,19 @@ public class Main {
                     System.out.println("Digite o salario da Depiladora");
                     double salarioDepiladora = scanner2.nextDouble();
                     Depiladora depiladora = new Depiladora(nomeDepiladora, cpfDepiladora, telefoneDepiladora, cargoDepiladora, salarioDepiladora);
-                    funcionarios.add(depiladora);
+
+                    try {
+                        for (Funcionario funcionario : funcionarios) {
+                            if (funcionario.getCpf().equals(depiladora.getCpf())) {
+                                throw new IllegalArgumentException("Já existe um funcionario com este CPF!");
+                            }
+                        }
+                        funcionarios.add(depiladora);
+
+                    } catch (IllegalArgumentException e) {
+                        System.out.println(e.getMessage());
+                        break;
+                    }
                     break;
 
 
@@ -81,7 +108,20 @@ public class Main {
                     System.out.println("Digite o salario da Extensionista");
                     double salarioExtensionista = scanner3.nextDouble();
                     Extensionista extensionista = new Extensionista(nomeExtensionista, cpf, telefoneExtensionista, cargoExtensionista, salarioExtensionista);
-                    funcionarios.add(extensionista);
+
+                    try {
+                        for (Funcionario funcionario : funcionarios) {
+                            if (funcionario.getCpf().equals(extensionista.getCpf())) {
+                                throw new IllegalArgumentException("Já existe um funcionario com este CPF!");
+                            }
+                        }
+                        funcionarios.add(extensionista);
+                        System.out.println("Funcionario cadastrado com sucesso!");
+
+                    } catch (IllegalArgumentException e) {
+                        System.out.println(e.getMessage());
+                        break;
+                    }
                     break;
 
 
@@ -100,6 +140,13 @@ public class Main {
                     System.out.println("Digite a data");
                     String data = scanner5.nextLine();
 
+                    System.out.println("-----------------------------------");
+                    System.out.println("Escolha o funcionario que vai fazer o serviço");
+                    for (Funcionario funcionario : funcionarios) {
+                        System.out.println(funcionario);
+                    }
+                    System.out.println("-----------------------------------");
+
 
                     System.out.println("Digite o nome do funcionario que vai fazer o serviço");
                     String nomeFuncionario = scanner5.nextLine();
@@ -111,14 +158,29 @@ public class Main {
                     for (Funcionario funcionario : funcionarios) {
                         if (funcionario.getNome().equals(nomeFuncionario)) {
                             if (funcionario instanceof Manicure manicureIstrue) {
-                                Agendamento agendamento = new Agendamento(nomeCliente, data, manicureIstrue, valorServico);
-                                agenda.addAgendamento(agendamento);
+                                Agendamento agendamento = new Agendamento(data, nomeCliente, manicureIstrue, valorServico);
+                                try {
+                                    agenda.addAgendamento(agendamento);
+                                    System.out.println("Agendamento realizado com sucesso!");
+                                } catch (Exception e) {
+                                    System.out.println(e.getMessage());
+                                }
                             } else if (funcionario instanceof Depiladora depiladoraIstrue) {
-                                Agendamento agendamento = new Agendamento(nomeCliente, data, depiladoraIstrue, valorServico);
-                                agenda.addAgendamento(agendamento);
+                                Agendamento agendamento = new Agendamento(data, nomeCliente, depiladoraIstrue, valorServico);
+                                try {
+                                    agenda.addAgendamento(agendamento);
+                                    System.out.println("Agendamento realizado com sucesso!");
+                                } catch (Exception e) {
+                                    System.out.println(e.getMessage());
+                                }
                             } else if (funcionario instanceof Extensionista extensionistaIstrue) {
-                                Agendamento agendamento = new Agendamento(nomeCliente, data, extensionistaIstrue, valorServico);
-                                agenda.addAgendamento(agendamento);
+                                Agendamento agendamento = new Agendamento(data, nomeCliente, extensionistaIstrue, valorServico);
+                                try {
+                                    agenda.addAgendamento(agendamento);
+                                    System.out.println("Agendamento realizado com sucesso!");
+                                } catch (Exception e) {
+                                    System.out.println(e.getMessage());
+                                }
                             }
                         }
 
@@ -147,14 +209,37 @@ public class Main {
                             agenda.comissaoPorServico(funcinarioDeBeleza);
                         }
                     }
-
-
+                    break;
                 case 9:
+                    Scanner scanner8 = new Scanner(System.in);
+                    System.out.println("Digite a data");
+                    String dataAgendamentoParaApagar = scanner8.nextLine();
+                    agenda.ApagaAgendamentosPorData(dataAgendamentoParaApagar);
+                    break;
+
+                case 10:
+                    Scanner scanner9 = new Scanner(System.in);
+                    System.out.println("Digite o CPF do funcionario: ");
+                    String cpfFuncionarioParaApagar = scanner9.nextLine();
+                    for (Funcionario funcionario : funcionarios) {
+                        if (funcionario.getCpf().equals(cpfFuncionarioParaApagar)) {
+                            int index = funcionarios.indexOf(funcionario);
+                            funcionarios.remove(index);
+                            System.out.println("Funcionario removido com sucesso!");
+                            break;
+                        }
+
+                    }
+                    break;
+
+
+                case 11:
                     System.out.println("Saindo do sistema...");
+                    break;
             }
 
 
-        } while (opcao != 9);
+        } while (opcao != 11);
 
 
     }
