@@ -30,10 +30,12 @@ public class Main {
             System.out.println("6 - Listar Agendamentos");
             System.out.println("7 - Listar Agendamentos por Data");
             System.out.println("8 - Comissão do funcionario pelo serviço: ");
-            System.out.println("9 - Deletar Agendamento por Data");
+            System.out.println("9 - Deletar Agendamento");
             System.out.println("10 - Deletar funcionario por CPF");
+            System.out.println("11 - Editar Funcionario");
+            System.out.println("12 - Editar Agendamento");
 
-            System.out.println("11 - Sair");
+            System.out.println("13 - Sair");
             opcao = scanner.nextInt();
 
 
@@ -211,10 +213,7 @@ public class Main {
                     }
                     break;
                 case 9:
-                    Scanner scanner8 = new Scanner(System.in);
-                    System.out.println("Digite a data");
-                    String dataAgendamentoParaApagar = scanner8.nextLine();
-                    agenda.ApagaAgendamentosPorData(dataAgendamentoParaApagar);
+                    agenda.deletarAgendamento();
                     break;
 
                 case 10:
@@ -232,14 +231,42 @@ public class Main {
                     }
                     break;
 
-
                 case 11:
+                    Scanner scanner10 = new Scanner(System.in);
+                    System.out.println("Digite o CPF do funcionario: ");
+                    String cpfFuncionarioParaAlterar = scanner10.nextLine();
+                    for (Funcionario funcionario : funcionarios) {
+                        if (funcionario.getCpf().equals(cpfFuncionarioParaAlterar)) {
+                            System.out.println("Digite o novo nome do funcionario: ");
+                            String novoNome = scanner10.nextLine();
+                            funcionario.setNome(novoNome);
+                            System.out.println("Digite o novo telefone do funcionario: ");
+                            String novoTelefone = scanner10.nextLine();
+                            funcionario.setTelefone(novoTelefone);
+                            System.out.println("Digite o novo cargo do funcionario: ");
+                            String novoCargo = scanner10.nextLine();
+                            funcionario.setCargo(novoCargo);
+                            System.out.println("Digite o novo salario do funcionario: ");
+                            double novoSalario = scanner10.nextDouble();
+                            funcionario.setSalario(novoSalario);
+                            System.out.println("Funcionario alterado com sucesso!");
+                            break;
+                        }
+
+                    }
+                    break;
+                case 12:
+                    agenda.editarAgendamento();
+                    break;
+
+
+                case 13:
                     System.out.println("Saindo do sistema...");
                     break;
             }
 
 
-        } while (opcao != 11);
+        } while (opcao != 13);
 
 
     }
