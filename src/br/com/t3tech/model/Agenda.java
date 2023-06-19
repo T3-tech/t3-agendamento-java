@@ -26,51 +26,69 @@ public class Agenda {
 //    }
 
     public void listarAgendamentos() {
-        for (Agendamento agendamento : agendamentos) {
-            System.out.println(agendamento);
-        }
-    }
+        if (agendamentos.size() == 0) {
+            System.out.println("Nenhum agendamento cadastrado!");
 
-    public void listarAgendamentosPorData(String data) {
-        for (Agendamento agendamento : agendamentos) {
-            if (agendamento.getData().equals(data)) {
+        } else {
+            for (Agendamento agendamento : agendamentos) {
                 System.out.println(agendamento);
             }
         }
+
+
+    }
+
+    public void listarAgendamentosPorData(String data) {
+
+        if (agendamentos.size() == 0) {
+            System.out.println("Nenhum agendamento cadastrado!");
+
+        } else {
+            for (Agendamento agendamento : agendamentos) {
+                if (agendamento.getData().equals(data)) {
+                    System.out.println(agendamento);
+                }
+            }
+        }
+
+
     }
 
 
     public void comissaoPorServico(ServicoDeBeleza funcionario) {
-        for (Agendamento agendamento : agendamentos) {
-            if (agendamento.getServicoDeBeleza().equals(funcionario)) {
-                System.out.println(agendamento + "\nValor a ser pago: " + funcionario.getComissao(agendamento.getValor()));
+        if (agendamentos.size() == 0) {
+            System.out.println("Nenhum agendamento cadastrado!");
+
+        } else {
+            for (Agendamento agendamento : agendamentos) {
+                if (agendamento.getServicoDeBeleza().equals(funcionario)) {
+                    System.out.println(agendamento + "\nValor a ser pago: " + funcionario.getComissao(agendamento.getValor()));
+                }
+
             }
-
         }
-    }
 
-//    public void ApagaAgendamentosPorData(String data) {
-//
-//        for (Agendamento agendamento : agendamentos) {
-//            if (agendamento.getData().equals(data)) {
-//                agendamentos.remove(agendamento);
-//                System.out.println("Agendamento removido com sucesso!");
-//                break;
-//            }
-//        }
-//    }
+
+    }
 
 
     public void deletarAgendamento() {
-        Scanner scanner = new Scanner(System.in);
-        for (int i = 0; i < agendamentos.size(); i++) {
-            System.out.println((i + 1 )+" - " + agendamentos.get(i));
+
+        if (agendamentos.size() == 0) {
+            System.out.println("Nenhum agendamento cadastrado!");
+        } else {
+            Scanner scanner = new Scanner(System.in);
+            for (int i = 0; i < agendamentos.size(); i++) {
+                System.out.println((i + 1) + " - " + agendamentos.get(i));
+            }
+            System.out.println("Digite o número do agendamento que deseja remover: ");
+            int numero = scanner.nextInt();
+            numero -= 1;
+            agendamentos.remove(numero);
+            System.out.println("Agendamento removido com sucesso!");
         }
-        System.out.println("Digite o número do agendamento que deseja remover: ");
-        int numero = scanner.nextInt();
-        numero -= 1;
-        agendamentos.remove(numero);
-        System.out.println("Agendamento removido com sucesso!");
+
+
     }
 
     public void editarAgendamento() {

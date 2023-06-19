@@ -17,11 +17,11 @@ public class Main {
         int opcao;
         do {
             Scanner scanner = new Scanner(System.in);
-
+            System.out.println();
             System.out.println("*****************************************");
             System.out.println("T3Tech - Sistema de Agendamento de Salão");
             System.out.println("*****************************************");
-            System.out.println("Escolha uma opção");
+            System.out.println();
             System.out.println("1 - Cadastrar Manicure");
             System.out.println("2 - Cadastrar Depiladora");
             System.out.println("3 - Cadastrar  Extencionista de Cílios");
@@ -34,8 +34,11 @@ public class Main {
             System.out.println("10 - Deletar funcionario por CPF");
             System.out.println("11 - Editar Funcionario");
             System.out.println("12 - Editar Agendamento");
-
             System.out.println("13 - Sair");
+            System.out.println();
+            System.out.print("Digite a opção desejada: ");
+
+
             opcao = scanner.nextInt();
 
 
@@ -48,11 +51,9 @@ public class Main {
                     String cpfManicure = scanner1.nextLine();
                     System.out.println("Digite o telefone da Manicure");
                     String telefoneManicure = scanner1.nextLine();
-                    System.out.println("Digite o cargo da Manicure");
-                    String cargoManicure = scanner1.nextLine();
                     System.out.println("Digite o salario da Manicure");
                     double salarioManicure = scanner1.nextDouble();
-                    Manicure manicure = new Manicure(nomeManicure, cpfManicure, telefoneManicure, cargoManicure, salarioManicure);
+                    Manicure manicure = new Manicure(nomeManicure, cpfManicure, telefoneManicure, salarioManicure);
 
                     try {
                         for (Funcionario funcionario : funcionarios) {
@@ -61,6 +62,7 @@ public class Main {
                             }
                         }
                         funcionarios.add(manicure);
+                        System.out.println("Funcionario cadastrado com sucesso!");
 
                     } catch (IllegalArgumentException e) {
                         System.out.println(e.getMessage());
@@ -76,11 +78,10 @@ public class Main {
                     String cpfDepiladora = scanner2.nextLine();
                     System.out.println("Digite o telefone da Depiladora");
                     String telefoneDepiladora = scanner2.nextLine();
-                    System.out.println("Digite o cargo da Depiladora");
-                    String cargoDepiladora = scanner2.nextLine();
+                    scanner2.nextLine();
                     System.out.println("Digite o salario da Depiladora");
                     double salarioDepiladora = scanner2.nextDouble();
-                    Depiladora depiladora = new Depiladora(nomeDepiladora, cpfDepiladora, telefoneDepiladora, cargoDepiladora, salarioDepiladora);
+                    Depiladora depiladora = new Depiladora(nomeDepiladora, cpfDepiladora, telefoneDepiladora, salarioDepiladora);
 
                     try {
                         for (Funcionario funcionario : funcionarios) {
@@ -89,6 +90,7 @@ public class Main {
                             }
                         }
                         funcionarios.add(depiladora);
+                        System.out.println("Funcionario cadastrado com sucesso!");
 
                     } catch (IllegalArgumentException e) {
                         System.out.println(e.getMessage());
@@ -105,11 +107,9 @@ public class Main {
                     String cpf = scanner3.nextLine();
                     System.out.println("Digite o telefone da Extensionista");
                     String telefoneExtensionista = scanner3.nextLine();
-                    System.out.println("Digite o cargo da Extensionista");
-                    String cargoExtensionista = scanner3.nextLine();
                     System.out.println("Digite o salario da Extensionista");
                     double salarioExtensionista = scanner3.nextDouble();
-                    Extensionista extensionista = new Extensionista(nomeExtensionista, cpf, telefoneExtensionista, cargoExtensionista, salarioExtensionista);
+                    Extensionista extensionista = new Extensionista(nomeExtensionista, cpf, telefoneExtensionista, salarioExtensionista);
 
                     try {
                         for (Funcionario funcionario : funcionarios) {
@@ -143,15 +143,27 @@ public class Main {
                     String data = scanner5.nextLine();
 
                     System.out.println("-----------------------------------");
-                    System.out.println("Escolha o funcionario que vai fazer o serviço");
-                    for (Funcionario funcionario : funcionarios) {
-                        System.out.println(funcionario);
+                    System.out.println("Funcionários");
+                    for (int i = 0; i < funcionarios.size(); i++) {
+                        System.out.print((i + 1) + ")" + funcionarios.get(i).getNome());
+                        if (funcionarios.get(i) instanceof Depiladora) {
+                            System.out.println(" - Depiladora");
+                        } else if (funcionarios.get(i) instanceof Manicure) {
+                            System.out.println(" - Manicure");
+                        } else if (funcionarios.get(i) instanceof Extensionista) {
+                            System.out.println(" - Extensionista");
+                        }
                     }
                     System.out.println("-----------------------------------");
 
 
-                    System.out.println("Digite o nome do funcionario que vai fazer o serviço");
-                    String nomeFuncionario = scanner5.nextLine();
+                    System.out.println("Digite o numero do funcionario que vai fazer o serviço");
+                    int idFuncionario = scanner5.nextInt();
+
+                    Funcionario achouFuncionario = funcionarios.get(idFuncionario - 1);
+
+                    String nomeFuncionario = achouFuncionario.getNome();
+
                     scanner5.reset();
                     System.out.println("Digite o valor do serviço");
                     double valorServico = scanner5.nextDouble();
@@ -243,9 +255,6 @@ public class Main {
                             System.out.println("Digite o novo telefone do funcionario: ");
                             String novoTelefone = scanner10.nextLine();
                             funcionario.setTelefone(novoTelefone);
-                            System.out.println("Digite o novo cargo do funcionario: ");
-                            String novoCargo = scanner10.nextLine();
-                            funcionario.setCargo(novoCargo);
                             System.out.println("Digite o novo salario do funcionario: ");
                             double novoSalario = scanner10.nextDouble();
                             funcionario.setSalario(novoSalario);

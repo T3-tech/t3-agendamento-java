@@ -8,30 +8,20 @@ public abstract class Funcionario {
     private String cpf;
     private String telefone;
 
-    private String cargo;
-
     private double salario;
 
 
     public Funcionario() {
     }
 
-    public Funcionario(String nome, String cpf, String telefone, String cargo, double salario) {
+    public Funcionario(String nome, String cpf, String telefone, double salario) {
         this.nome = nome;
         this.cpf = cpf;
         this.telefone = telefone;
-        this.cargo = cargo;
         this.salario = salario;
     }
 
 
-    public String getCargo() {
-        return cargo;
-    }
-
-    public void setCargo(String cargo) {
-        this.cargo = cargo;
-    }
 
     public double getSalario() {
         return salario;

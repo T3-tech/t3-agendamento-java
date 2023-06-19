@@ -7,8 +7,8 @@ public class Depiladora  extends  Funcionario implements ServicoDeBeleza{
     public Depiladora() {
     }
 
-    public Depiladora(String nome, String cpf, String telefone, String cargo, double salario) {
-        super(nome, cpf, telefone, cargo, salario);
+    public Depiladora(String nome, String cpf, String telefone, double salario) {
+        super(nome, cpf, telefone, salario);
     }
 
     @Override

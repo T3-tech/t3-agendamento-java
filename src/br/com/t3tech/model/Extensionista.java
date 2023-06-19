@@ -9,8 +9,8 @@ public class Extensionista extends Funcionario implements ServicoDeBeleza {
     public Extensionista() {
     }
 
-    public Extensionista(String nome, String cpf, String telefone, String cargo, double salario) {
-        super(nome, cpf, telefone, cargo, salario);
+    public Extensionista(String nome, String cpf, String telefone,  double salario) {
+        super(nome, cpf, telefone, salario);
     }
 
     @Override
